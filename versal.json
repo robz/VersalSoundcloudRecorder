@@ -1,0 +1,10 @@
+{
+  "launcher": "iframe",
+  "name": "workshop-gadget",
+  "version": "0.0.3",
+  "title": "My gadget",
+  "description": "Does nothing just yet",
+  "author": "anonymous",
+  "defaultConfig": {},
+  "defaultUserState": {}
+}

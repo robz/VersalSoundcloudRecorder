@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Empty gadget</title>
+<script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
+<script src="bower_components/eventEmitter/EventEmitter.js"></script>
+<script src="bower_components/versal-gadget-api/versal-player-api.js"></script>
+<!--
+<link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
+-->
+<style>
+input {
+  font-size: 20px;
+  padding: 5px;
+  min-width: 300px;
+}
+input[readonly] {
+  border: 1px solid transparent;
+}
+</style>
+</head>
+
+<body>
+<button name="record" style="width: 150px; height: 150px; background: blue;">record</button>
+<script src="soundcloudsdk.js"></script>
+
+<script>
+var myButton = document.querySelector('[name=record]');
+var player = new VersalPlayerAPI();
+player.setHeight(200);
+
+myButton.addEventListener('click', function(e){
+  SC.initialize({
+    client_id: "0b0b7f6d1d0a5ee5411860ebce0872aa",
+    redirect_uri: "https://stack.versal.com/api2/gadgets/223244417/workshop-gadget/0.0.2/callback.html"
+  })
+
+  SC.connect(function() {
+    SC.record({
+      start: function() {
+        window.setTimeout(function() {
+          SC.recordStop();
+          SC.recordUpload({
+            track: { title: 'versal test '+(new Date()).toString() }
+          });
+        }, 10000);
+      }
+    });
+  });
+});
+
+player.startListening();
+</script>
+</body>
+</html>
